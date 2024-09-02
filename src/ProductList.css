@@ -185,6 +185,7 @@ body {
 .cart {
   color: white;
   display: flex;
+  position: relative
 }
 
 .cart_quantity_count {
