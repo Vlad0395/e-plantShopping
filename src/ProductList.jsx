@@ -258,6 +258,10 @@ function ProductList() {
       [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
     }));
   };
+
+  useEffect(() => {
+    console.log(addedToCart);
+  }, [addedToCart])
   return (
     <div>
       <div className="navbar" style={styleObj}>
@@ -282,14 +286,15 @@ function ProductList() {
         <div className="product-grid">
           {plantsArray.map((category, index) => (
             <div key={index}>
-              <h1><div>{category.category}</div></h1>
+              <h1 className='product-category'>{category.category}</h1>
               <div className="product-list">
                 {category.plants.map((plant, plantIndex) => (
                   <div className="product-card" key={plantIndex}>
-                    <img className="product-image" src={plant.image} alt={plant.name} />
                     <div className="product-title">{plant.name}</div>
-                    {/*Similarly like the above plant.name show other details like description and cost*/}
-                    <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                    <img className="product-image" src={plant.image} alt={plant.name} />
+                    <div className="product-price">{plant.cost}</div>
+                    <div className="product-description">{plant.description}</div>
+                    <button className="product-button" onClick={() => handleAddToCart(plant)} disabled={addedToCart[plant.name]}>{addedToCart[plant.name] ? "Added" : "Add"} to Cart</button>
                   </div>
                 ))}
               </div>
